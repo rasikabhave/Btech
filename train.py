@@ -22,15 +22,15 @@ def assign_labels(line, params):
 def readFilesCreateDataArray(params):
     list_line = []
     no_of_rows = []
-    zabix_msg = [ "system.cpu.load[percpu,avg1]", "system.cpu.intr", "system.cpu.switches", "system.cpu.util[,idle]", "system.cpu.util[,interrupt]", 
-        "system.cpu.util[,iowait]", "system.cpu.util[,nice]", "system.cpu.util[,softirq]", "system.cpu.util[,steal]", "system.cpu.util[,system]", 
+    zabix_msg = [ "system.cpu.load[percpu,avg1]", "system.cpu.intr", "system.cpu.switches", "system.cpu.util[,idle]", "system.cpu.util[,interrupt]",
+        "system.cpu.util[,iowait]", "system.cpu.util[,nice]", "system.cpu.util[,softirq]", "system.cpu.util[,steal]", "system.cpu.util[,system]",
         "system.cpu.util[,user]",  "proc.num[,,run]", "net.if.in[ens32]", "net.if.in[virbr0-nic]", "net.if.in[virbr0]", "net.if.out[ens32]",
-        "net.if.out[virbr0-nic]", "net.if.out[virbr0]", "system.swap.size[,free]", "vfs.fs.inode[/,pfree]", "vfs.fs.size[/,free]", 
+        "net.if.out[virbr0-nic]", "net.if.out[virbr0]", "system.swap.size[,free]", "vfs.fs.inode[/,pfree]", "vfs.fs.size[/,free]",
         "vfs.fs.size[/,used]",   "vm.memory.size[available]",  "proc.num[]",
     ]
-    zabix_params =  [ 'cpu_load_start', 'cpu_intr_start', 'cpu_switches_start', 'cpu_uidle_start', 'cpu_uintr_start', 'cpu_iowait_start', 'cpu_unice_start', 
-        'cpu_usoftirq', 'cpu_usteal_start', 'cpu_usystem_start', 'cpu_uuser_start', 'cpu_procrun_start', 'in_ens32_start', 'in_vibr0_nic_start', 
-        'in_vibr0_start', 'out_ens32_start', 'out_vibr0_nic_start', 'out_vibr0_start', 'swap_free_start','inode_pfree_start', 'vfs_size_free_start', 
+    zabix_params =  [ 'cpu_load_start', 'cpu_intr_start', 'cpu_switches_start', 'cpu_uidle_start', 'cpu_uintr_start', 'cpu_iowait_start', 'cpu_unice_start',
+        'cpu_usoftirq', 'cpu_usteal_start', 'cpu_usystem_start', 'cpu_uuser_start', 'cpu_procrun_start', 'in_ens32_start', 'in_vibr0_nic_start',
+        'in_vibr0_start', 'out_ens32_start', 'out_vibr0_nic_start', 'out_vibr0_start', 'swap_free_start','inode_pfree_start', 'vfs_size_free_start',
         'vfs_size_used_start', 'mem_size_start', 'cpu_proc_start'
     ]
     zabix = dict.fromkeys(zabix_params)
@@ -67,7 +67,7 @@ with open("data/argfile") as f:
         X = numpy.concatenate((X, numpy.array(data).transpose()), 0)
         aline = f.readline()
 
-names = [ 'cpu_load', 'cpu_interrupts', 'cpu_switches', 'cpu_uidle', 'cpu_uintr', 'cpu_uiowait', 'cpu_unice', 'cpu_usoftirq', 'cpu_usteal', 'cpu_usystem', 'cpu_uuser', 
+names = [ 'cpu_load', 'cpu_interrupts', 'cpu_switches', 'cpu_uidle', 'cpu_uintr', 'cpu_uiowait', 'cpu_unice', 'cpu_usoftirq', 'cpu_usteal', 'cpu_usystem', 'cpu_uuser',
     'cpu_procrun', 'in_ens32', 'in_vibr0_nic', 'in_vibr0', 'out_ens32', 'out_vibr0_nic', 'swap_free', 'inode_pfree', ' vfs_size_free', 'vfs_size_used', 'mem_size', 'class'
 ]
 dataset = pandas.DataFrame(X[:,1:], columns = names, index=X[:,0])
@@ -83,7 +83,7 @@ X_train, X_validation, Y_train, Y_validation = model_selection.train_test_split(
 scoring = 'accuracy'
 
 # Spot Check Algorithms
-models = { 'LR': LogisticRegression(), 'LDA': LinearDiscriminantAnalysis(), 'KNN': KNeighborsClassifier(), 'DTC': DecisionTreeClassifier(), 
+models = { 'LR': LogisticRegression(), 'LDA': LinearDiscriminantAnalysis(), 'KNN': KNeighborsClassifier(), 'DTC': DecisionTreeClassifier(),
            'NB': GaussianNB(), 'SVM': SVC(), 'MLP': MLPClassifier() }
 
 # evaluate each model in turn
