@@ -29,3 +29,10 @@
 
 ### data/vmstats/
 	_Stats and metrics generted by zabix of the VM_
+
+###the git branches are as follows
+	master-
+		sub_nikita
+		sub_rasika
+	nikita 
+	rasika
