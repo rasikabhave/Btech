@@ -1,0 +1,133 @@
+Going to connect to http://localhost/zabbix as admin, and retrieve from host Server2 the item vfs.fs.size[/,free]
+Zabbix API version: 3.4.7
+----------------------------
+Found host Server2 with id 10254
+Found item agent.hostname on host Server2 with item id/type 28258/1
+----------------------------
+Retrieved 0 rows of history
+Found item agent.ping on host Server2 with item id/type 28259/3
+----------------------------
+Retrieved 0 rows of history
+Found item agent.version on host Server2 with item id/type 28260/1
+----------------------------
+Retrieved 0 rows of history
+Found item kernel.maxfiles on host Server2 with item id/type 28261/3
+----------------------------
+Retrieved 0 rows of history
+Found item kernel.maxproc on host Server2 with item id/type 28262/3
+----------------------------
+Retrieved 0 rows of history
+Found item net.if.in[ens32] on host Server2 with item id/type 28290/3
+----------------------------
+Retrieved 0 rows of history
+Found item net.if.in[virbr0-nic] on host Server2 with item id/type 28292/3
+----------------------------
+Retrieved 0 rows of history
+Found item net.if.in[virbr0] on host Server2 with item id/type 28291/3
+----------------------------
+Retrieved 0 rows of history
+Found item net.if.out[ens32] on host Server2 with item id/type 28293/3
+----------------------------
+Retrieved 0 rows of history
+Found item net.if.out[virbr0-nic] on host Server2 with item id/type 28295/3
+----------------------------
+Retrieved 0 rows of history
+Found item net.if.out[virbr0] on host Server2 with item id/type 28294/3
+----------------------------
+Retrieved 0 rows of history
+Found item proc.num[,,run] on host Server2 with item id/type 28263/3
+----------------------------
+Retrieved 0 rows of history
+Found item proc.num[] on host Server2 with item id/type 28264/3
+----------------------------
+Retrieved 0 rows of history
+Found item system.boottime on host Server2 with item id/type 28265/3
+----------------------------
+Retrieved 0 rows of history
+Found item system.cpu.intr on host Server2 with item id/type 28266/3
+----------------------------
+Retrieved 0 rows of history
+Found item system.cpu.load[percpu,avg15] on host Server2 with item id/type 28267/0
+----------------------------
+Retrieved 0 rows of history
+Found item system.cpu.load[percpu,avg1] on host Server2 with item id/type 28268/0
+----------------------------
+Retrieved 0 rows of history
+Found item system.cpu.load[percpu,avg5] on host Server2 with item id/type 28269/0
+----------------------------
+Retrieved 0 rows of history
+Found item system.cpu.switches on host Server2 with item id/type 28270/3
+----------------------------
+Retrieved 0 rows of history
+Found item system.cpu.util[,idle] on host Server2 with item id/type 28271/0
+----------------------------
+Retrieved 0 rows of history
+Found item system.cpu.util[,interrupt] on host Server2 with item id/type 28272/0
+----------------------------
+Retrieved 0 rows of history
+Found item system.cpu.util[,iowait] on host Server2 with item id/type 28273/0
+----------------------------
+Retrieved 0 rows of history
+Found item system.cpu.util[,nice] on host Server2 with item id/type 28274/0
+----------------------------
+Retrieved 0 rows of history
+Found item system.cpu.util[,softirq] on host Server2 with item id/type 28275/0
+----------------------------
+Retrieved 0 rows of history
+Found item system.cpu.util[,steal] on host Server2 with item id/type 28276/0
+----------------------------
+Retrieved 0 rows of history
+Found item system.cpu.util[,system] on host Server2 with item id/type 28277/0
+----------------------------
+Retrieved 0 rows of history
+Found item system.cpu.util[,user] on host Server2 with item id/type 28278/0
+----------------------------
+Retrieved 0 rows of history
+Found item system.hostname on host Server2 with item id/type 28279/1
+----------------------------
+Retrieved 0 rows of history
+Found item system.localtime on host Server2 with item id/type 28280/3
+----------------------------
+Retrieved 0 rows of history
+Found item system.swap.size[,free] on host Server2 with item id/type 28281/3
+----------------------------
+Retrieved 0 rows of history
+Found item system.swap.size[,pfree] on host Server2 with item id/type 28282/0
+----------------------------
+Retrieved 0 rows of history
+Found item system.swap.size[,total] on host Server2 with item id/type 28283/3
+----------------------------
+Retrieved 0 rows of history
+Found item system.uname on host Server2 with item id/type 28284/1
+----------------------------
+Retrieved 0 rows of history
+Found item system.uptime on host Server2 with item id/type 28285/3
+----------------------------
+Retrieved 0 rows of history
+Found item system.users.num on host Server2 with item id/type 28286/3
+----------------------------
+Retrieved 0 rows of history
+Found item vfs.file.cksum[/etc/passwd] on host Server2 with item id/type 28287/3
+----------------------------
+Retrieved 0 rows of history
+Found item vfs.fs.inode[/,pfree] on host Server2 with item id/type 28296/0
+----------------------------
+Retrieved 0 rows of history
+Found item vfs.fs.size[/,free] on host Server2 with item id/type 28297/3
+----------------------------
+Retrieved 0 rows of history
+Found item vfs.fs.size[/,pfree] on host Server2 with item id/type 28298/0
+----------------------------
+Retrieved 0 rows of history
+Found item vfs.fs.size[/,total] on host Server2 with item id/type 28299/3
+----------------------------
+Retrieved 0 rows of history
+Found item vfs.fs.size[/,used] on host Server2 with item id/type 28300/3
+----------------------------
+Retrieved 0 rows of history
+Found item vm.memory.size[available] on host Server2 with item id/type 28288/3
+----------------------------
+Retrieved 0 rows of history
+Found item vm.memory.size[total] on host Server2 with item id/type 28289/3
+----------------------------
+Retrieved 0 rows of history
