@@ -1,0 +1,62 @@
+NEURAL NETWORK:
+identity: 0.782719 (0.175549) 	max iter 400 solver=lbfgs learning_rate_init = 0.005
+logistic: 0.320340 (0.012698) 	max iter 400
+tanh: 0.821728 (0.167884)		max iter 800 solver = lbfgs learning_rate_init = 0.005
+relu: 0.708603 (0.258527)  		max iter 400 solver = lbfgs learning_rate_init = 0.01
+
+
+
+
+
+
+
+SVM:
+max iterations = 100:
+train:0.918428 (0.074049)
+test:0.962884411453
+
+max iterations = 50:
+train:0.680527 (0.100914)
+test:0.680452456698
+
+max iterations = 150:
+train:0.967746 (0.004625)
+test:0.969247083775
+
+max iterations = 185:
+train:0.963415 (0.002622)
+test:0.975963237893
+
+max iterations = 190:
+train:0.964475 (0.001519)
+test:0.976316719689
+[[877   0   3   5   1]
+ [  0   0   0   2   0]
+ [  0   0 231   0   0]
+ [ 55   0   0 811   0]
+ [  1   0   0   0 843]]
+            precision    recall  f1-score   support
+
+        1.0       0.94      0.99      0.96       886
+        2.0       0.00      0.00      0.00         2
+        3.0       0.99      1.00      0.99       231
+        4.0       0.99      0.94      0.96       866
+        5.0       1.00      1.00      1.00       844
+
+avg / total       0.98      0.98      0.98      2829
+
+max iterations = 195:
+train:0.940792 (0.039049)
+test:0.976316719689
+
+max iterations = 200:
+train:svm: 0.874695 (0.017811)
+test:0.976316719689
+
+max iterations = 250:
+train:svm: 0.864353 (0.007581)
+test:0.867444326617
+
+max iterations = 210:
+train:svm: 0.865324 (0.008201)
+test:0.972428419936
