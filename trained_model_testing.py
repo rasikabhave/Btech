@@ -16,6 +16,8 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
+from sklearn.neural_network import MLPClassifier
+from sklearn import preprocessing
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 from zabbix.api import ZabbixAPI
 
@@ -51,8 +53,18 @@ def get_classify_one_datapoint(trained_models):
     hostId = thehost['result'][0]['hostid']
 
     #get metrics for that host
-    history = zapi.do_request('item.get', { "output": "extend", "hostids": hostId, "sortfield": 'name' })
-    print(len(history['result']))
+    #history = zapi.do_request('item.get', { "output": "extend", "hostids": hostId, "sortfield": 'name' })
+    #print(len(history['result']))
+    history = zapi.do_request('item.get',
+                          {
+                              
+                              'filter': {'host': host},
+                              #'sortorder': 'ASC',
+                              'time_from':int(time.time())-300#,
+                              #'output': 'extend'
+                          })
+    print((history['result']))
+    
     #following are the metrics that we need to pass to our algo
     items_we_need = ['system.cpu.load[percpu,avg1]','system.cpu.intr','system.cpu.switches','system.cpu.util[,idle]','system.cpu.util[,interrupt]',
         'system.cpu.util[,iowait]','system.cpu.util[,nice]','system.cpu.util[,softirq]','system.cpu.util[,steal]','system.cpu.util[,system]',
@@ -70,11 +82,13 @@ def get_classify_one_datapoint(trained_models):
 
     #return this value
     X_test = numpy.array(list1)
-
+    
+    anomaly_names = {1:"Normal Data", 2:"RAM overuse", 3:"Swap space overutilisation", 4:"CPU overload", 5:"Increased disk Input output"}
+    
     #classifying the data:
-    for model in trained_models:
-        predicted_class = int(model.predict(X_test.reshape(1, -1)))
-        print("predicted_class = " , predicted_class)
+    for model in trained_models.keys():
+        predicted_class = int(trained_models[model].predict(X_test.reshape(1, -1)))
+        print(model, "predicted_class =" , predicted_class, anomaly_names[predicted_class])
         #if predicted_class != 1:
             #t = threading.Thread(target = send_mail, args = (predicted_class, ))
             #t.start()
@@ -102,12 +116,13 @@ class PeriodicEvent(object):
 
 def create_a_model_of_the_data():
     #open file where all the data is stored
-    url  = "data/vmstats/foo.csv"
+    url  = "data/vmstats/consolidated_data.csv"
     names = ['cpu_load', 'cpu_interrupts', 'cpu_switches', 'cpu_uidle', 'cpu_uintr', 'cpu_uiowait', 'cpu_unice', 'cpu_usoftirq', 'cpu_usteal', 'cpu_usystem',
         'cpu_uuser', 'cpu_procrun', 'in_ens32', 'in_vibr0_nic', 'in_vibr0', 'out_ens32', 'out_vibr0_nic','out_vibr0' 'swap_free', 'inode_pfree', ' vfs_size_free',
         'vfs_size_used', 'mem_size', 'class'
     ]
     dataset = pandas.read_csv(url, index_col=None)
+    print dataset.shape
     array = dataset.values
     #separate the input and expected classes
     X = array[:,0:len(array[0])-1]
@@ -121,8 +136,14 @@ def create_a_model_of_the_data():
     knn = KNeighborsClassifier().fit(X,Y)
     dtc = DecisionTreeClassifier().fit(X,Y)
     nb = GaussianNB().fit(X,Y)
-    svm = SVC().fit(X,Y)
-    trained_models = [lr, lda, knn, dtc, nb, svm]
+    
+    # normalize the data
+    X_normalized = preprocessing.normalize(X, norm='l2')
+    
+    #tweaking params to increase accuracy
+    svm = SVC().set_params(kernel='linear', max_iter = 190).fit(X_normalized,Y)
+    mlp = MLPClassifier().set_params(activation='identity', max_iter = 400, learning_rate_init = 0.0065).fit(X_normalized, Y)
+    trained_models = {"LR":lr, "LDA":lda, "KNN":knn, "DTC":dtc, "NB":nb, "SVM":svm, "NN":mlp}
     return trained_models
 
 def main():
