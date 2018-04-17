@@ -71,7 +71,8 @@ names = [ 'cpu_load', 'cpu_interrupts', 'cpu_switches', 'cpu_uidle', 'cpu_uintr'
     'cpu_procrun', 'in_ens32', 'in_vibr0_nic', 'in_vibr0', 'out_ens32', 'out_vibr0_nic', 'swap_free', 'inode_pfree', ' vfs_size_free', 'vfs_size_used', 'mem_size', 'class'
 ]
 dataset = pandas.DataFrame(X[:,1:], columns = names, index=X[:,0])
-
+#write the data in a .csv file
+numpy.savetxt("data/vmstats/consolidated_data.csv", X, delimiter = ",")
 # Split-out validation dataset
 X = dataset.values[:,0:len(X[0])-1]
 Y = dataset.values[:,len(X[0])-1]
