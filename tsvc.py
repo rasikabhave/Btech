@@ -84,98 +84,67 @@ scoring = 'accuracy'
 
 # Spot Check Algorithms
 models = { 'LR': LogisticRegression(), 'LDA': LinearDiscriminantAnalysis(), 'KNN': KNeighborsClassifier(), 'DTC': DecisionTreeClassifier(),
-           'NB': GaussianNB(), 'SVM': SVC(), 'MLP': MLPClassifier() }
+           'NB': GaussianNB() }
 
-# evaluate each model in turn
-#results = []
-#names = []
-#for name in models.keys():
-#   kfold = model_selection.KFold(n_splits=10, random_state=seed)
-#    cv_results = model_selection.cross_val_score(models[name], X_train, Y_train, cv=kfold, scoring=scoring)
-#    results.append(cv_results)
-#    names.append(name)
-#    msg = "%s: %f (%f)" % (name, cv_results.mean(), cv_results.std())
-#    print(msg)
+#evaluate each model in turn
+results = []
+names = []
+for name in models.keys():
+    kfold = model_selection.KFold(n_splits=10, random_state=seed)
+    cv_results = model_selection.cross_val_score(models[name], X_train, Y_train, cv=kfold, scoring=scoring)
+    results.append(cv_results)
+    names.append(name)
+    msg = "%s: %f (%f)" % (name, cv_results.mean(), cv_results.std())
+    print(msg)
 
-# Make predictions on validation dataset
-#for name in models.keys():
-#    print(name)
-#    func = models[name]
-#    func.fit(X_train, Y_train)
-#    predictions = func.predict(X_validation)
-#    print(accuracy_score(Y_validation, predictions))
-#    print(confusion_matrix(Y_validation, predictions))
-#    print(classification_report(Y_validation, predictions))
+#Make predictions on validation dataset
+for name in models.keys():
+    print(name)
+    func = models[name]
+    func.fit(X_train, Y_train)
+    predictions = func.predict(X_validation)
+    print(accuracy_score(Y_validation, predictions))
+    print(confusion_matrix(Y_validation, predictions))
+    print(classification_report(Y_validation, predictions))
 
 #thisis where i have started making changes to MLP:
 X_test_normalized = preprocessing.normalize(X_validation, norm = 'l2');
 X_normalized = preprocessing.normalize(X_train, norm='l2');
 kfold = model_selection.KFold(n_splits=10, random_state=seed)
-
 mlp = MLPClassifier();
-mlp.set_params(activation='identity', max_iter = 400,solver = 'lbfgs',learning_rate_init = 0.007)
+mlp.set_params(activation='identity', max_iter = 400, learning_rate_init = 0.0065)
 cv_results = model_selection.cross_val_score(mlp, X_normalized, Y_train, cv=kfold, scoring=scoring)
 msg = "%s: %f (%f)" % ('mlp', cv_results.mean(), cv_results.std())
 print(msg)
 
-mlp = MLPClassifier();
-mlp.set_params(activation='identity', max_iter = 400,solver = 'lbfgs',learning_rate_init = 0.02)
-cv_results = model_selection.cross_val_score(mlp, X_normalized, Y_train, cv=kfold, scoring=scoring)
-msg = "%s: %f (%f)" % ('mlp', cv_results.mean(), cv_results.std())
-print(msg)
+print "\n\n\n"
+mlp.fit(X_normalized, Y_train);
+print mlp;
+predictions = mlp.predict(X_test_normalized)
+print(accuracy_score(Y_validation, predictions))
+print(confusion_matrix(Y_validation, predictions))
+print(classification_report(Y_validation, predictions))
 
-mlp = MLPClassifier();
-mlp.set_params(activation='logistic', max_iter = 400,solver = 'lbfgs', learning_rate_init = 0.007)
-cv_results = model_selection.cross_val_score(mlp, X_normalized, Y_train, cv=kfold, scoring=scoring)
-msg = "%s: %f (%f)" % ('mlp', cv_results.mean(), cv_results.std())
-print(msg)
-
-mlp = MLPClassifier();
-mlp.set_params(activation='logistic', max_iter = 400, solver = 'lbfgs',learning_rate_init = 0.02)
-cv_results = model_selection.cross_val_score(mlp, X_normalized, Y_train, cv=kfold, scoring=scoring)
-msg = "%s: %f (%f)" % ('mlp', cv_results.mean(), cv_results.std())
-print(msg)
-
-mlp = MLPClassifier();
-mlp.set_params(activation='relu', max_iter = 400, solver = 'lbfgs',learning_rate_init = 0.007)
-cv_results = model_selection.cross_val_score(mlp, X_normalized, Y_train, cv=kfold, scoring=scoring)
-msg = "%s: %f (%f)" % ('mlp', cv_results.mean(), cv_results.std())
-print(msg)
-
-mlp = MLPClassifier();
-mlp.set_params(activation='relu', max_iter = 400,solver = 'lbfgs', learning_rate_init = 0.02)
-cv_results = model_selection.cross_val_score(mlp, X_normalized, Y_train, cv=kfold, scoring=scoring)
-msg = "%s: %f (%f)" % ('mlp', cv_results.mean(), cv_results.std())
-print(msg)
-
-#print "\n\n\n"
-#mlp = MLPClassifier();
-#mlp.set_params(kernel='linear', max_iter = 190).fit(X_normalized, Y_train);
-#print mlp;
-#predictions = mlp.predict(X_test_normalized)
-#print(accuracy_score(Y_validation, predictions))
-#print(confusion_matrix(Y_validation, predictions))
-#print(classification_report(Y_validation, predictions))
 
 #thisis where i have stopped making changes to MLP
 
 #thisis where i have started making changes to SVM:
-#X_test_normalized = preprocessing.normalize(X_validation, norm = 'l2');
-#X_normalized = preprocessing.normalize(X_train, norm='l2');
-#kfold = model_selection.KFold(n_splits=10, random_state=seed)
-#svm = SVC();
-#svm.set_params(kernel='linear', max_iter = 190)
-#cv_results = model_selection.cross_val_score(svm, X_normalized, Y_train, cv=kfold, scoring=scoring)
-#msg = "%s: %f (%f)" % ('svm', cv_results.mean(), cv_results.std())
-#print(msg)
 
-#print "\n\n\n"
-#svm = SVC();
-#svm.set_params(kernel='linear', max_iter = 190).fit(X_normalized, Y_train);
-#print svm;
-#predictions = svm.predict(X_test_normalized)
-#print(accuracy_score(Y_validation, predictions))
-#print(confusion_matrix(Y_validation, predictions))
-#print(classification_report(Y_validation, predictions))
+X_test_normalized = preprocessing.normalize(X_validation, norm = 'l2');
+X_normalized = preprocessing.normalize(X_train, norm='l2');
+kfold = model_selection.KFold(n_splits=10, random_state=seed)
+svm = SVC();
+svm.set_params(kernel='linear', max_iter = 190)
+cv_results = model_selection.cross_val_score(svm, X_normalized, Y_train, cv=kfold, scoring=scoring)
+msg = "%s: %f (%f)" % ('svm', cv_results.mean(), cv_results.std())
+print(msg)
+print "\n\n\n"
+svm = SVC();
+svm.set_params(kernel='linear', max_iter = 190).fit(X_normalized, Y_train);
+print svm;
+predictions = svm.predict(X_test_normalized)
+print(accuracy_score(Y_validation, predictions))
+print(confusion_matrix(Y_validation, predictions))
+print(classification_report(Y_validation, predictions))
 
 #thisis where i have stopped making changes to SVM
