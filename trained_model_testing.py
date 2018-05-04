@@ -41,7 +41,7 @@ def get_classify_one_datapoint(trained_models):
     url = "http://10.1.8.88/zabbix"
     user = "admin"
     password = "zabbix"
-    host = "Server2"
+    host = "Server132"
     key = "vfs.fs.size[/,free]"
     use_older_authenticate_method = False
 
@@ -73,6 +73,7 @@ def get_classify_one_datapoint(trained_models):
         'net.if.out[virbr0-nic]','net.if.out[virbr0]','system.swap.size[,free]','vfs.fs.inode[/,pfree]','vfs.fs.size[/,free]',
         'vfs.fs.size[/,used]','vm.memory.size[available]'
     ]
+    items_we_need = list( items_we_need[i] for i in [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] )
     #create a list of the metrics we need from the fetched list
     list1 = []
     for i in range(0, len(history['result'])):
@@ -128,6 +129,7 @@ def create_a_model_of_the_data():
     #separate the input and expected classes
     X = array[:,0:len(array[0])-1]
     Y = array[:,len(array[0])-1]
+    X = X[:, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]]
     # Test options and evaluation metric
     seed = 7
     scoring = 'accuracy'
