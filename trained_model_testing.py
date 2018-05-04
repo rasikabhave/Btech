@@ -1,6 +1,7 @@
 #loop once for every minute
 #done: import the get metrics cha code...but limit it to only one entry
 #pass that entry to the model and print if it is an anomaly or not
+#knn decision tree results on real time data
 
 
 #! /usr/bin/env python3.4
@@ -60,7 +61,7 @@ def get_classify_one_datapoint(trained_models):
                               
                               'filter': {'host': host},
                               #'sortorder': 'ASC',
-                              'time_from':int(time.time())-300#,
+                              'time_from':int(time.time())-60#,
                               #'output': 'extend'
                           })
     print((history['result']))
